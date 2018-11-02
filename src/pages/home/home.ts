@@ -17,12 +17,17 @@ ionViewWillEnter() {
     this.menu.swipeEnable(false);   
   } 
  
-ionViewDidLeave() {     
-    this.menu.swipeEnable(true);   
-  }
+//ionViewDidLeave() {     
+//    this.menu.swipeEnable(true);   
+//  }
 
   login() {
     this.navCtrl.setRoot('CategoriasPage')
   }
+
+  cadastrar(){
+    this.navCtrl.push('CadastroPage')
+  }
+
 }
 

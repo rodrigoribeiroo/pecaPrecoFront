@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 /**
- * Generated class for the CategoriasPage page.
+ * Generated class for the CadastroPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +11,20 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 @IonicPage()
 @Component({
-  selector: 'page-categorias',
-  templateUrl: 'categorias.html',
+  selector: 'page-cadastro',
+  templateUrl: 'cadastro.html',
 })
-export class CategoriasPage {
+export class CadastroPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriasPage');
+    console.log('ionViewDidLoad CadastroPage');
   }
 
-  ionViewWillEnter() {     
-    this.menu.swipeEnable(true);   
-  } 
+  login() {
+    this.navCtrl.setRoot('CategoriasPage')
+  }
 
 }
