@@ -23,8 +23,5 @@ export class CategoriasPage {
     console.log('ionViewDidLoad CategoriasPage');
   }
 
-  ionViewWillEnter() {     
-    this.menu.swipeEnable(true);   
-  } 
-
+ 
 }

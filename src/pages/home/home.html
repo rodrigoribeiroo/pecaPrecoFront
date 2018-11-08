@@ -1,17 +1,32 @@
-<ion-content padding>
-  <br>
-  <img src ="assets/imgs/logoPecaPreco.png" alt="logo">    
+<ion-header>
 
-  <form>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type = "text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Senha</ion-label>
-        <ion-input type = "password"></ion-input>
-      </ion-item>
-    <button ion-button block (click)="login()">Entrar</button>
-  </form>
-  <button ion-button block outline (click)="cadastrar()">Registrar</button>
+    <ion-navbar>
+        
+            <ion-buttons start>
+              <button ion-button (click)="login()">
+                <ion-icon name="contact"></ion-icon>
+              </button>
+            </ion-buttons>
+            <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+            <ion-title>
+                <img src ="assets/imgs/logoPecaPreco.png" alt="logo">
+            </ion-title>
+            <ion-buttons end>
+              <button ion-button (click)="doClick()">
+                <ion-icon name="more"></ion-icon>
+              </button>
+            </ion-buttons>
+          </ion-navbar>
+    <!--  <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <img src ="assets/imgs/logoPecaPreco.png" alt="logo">
+    </ion-navbar> -->
+  
+  </ion-header>
+
+<ion-content padding>
+  
 </ion-content>

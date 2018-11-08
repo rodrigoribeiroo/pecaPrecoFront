@@ -1,0 +1,26 @@
+<ion-header>
+<ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Entrar</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <br>
+    <img src ="assets/imgs/logoPecaPreco.png" alt="logo">    
+      
+    <form>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type = "text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input type = "password"></ion-input>
+      </ion-item>
+      <button ion-button block (click)="login()">Entrar</button>
+     </form>
+   <button ion-button block outline (click)="cadastrar()">Registrar</button>
+      <br>
+</ion-content>
