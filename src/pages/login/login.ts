@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { UsersProvider } from './../../providers/users/users';
+
 //import { MenuController } from 'ionic-angular/components/app/menu-controller';
 /**
  * Generated class for the LoginPage page.
@@ -14,10 +16,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  model: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams/*, public menu: MenuController*/) {
+  constructor(
+    public navCtrl: NavController, public navParams: NavParams, 
+    private toast: ToastController, private userProvider: UsersProvider/*, public menu: MenuController*/) {
+      this.model = new User();
+      this.model.email = "peter@klaven";
+      this.model.password = "cityslicka";
   }
-  
+
+  login(){
+    this.userProvider.login(this.model.email, this.model.password)
+    .then((result: any) => {
+       this.navCtrl.setRoot('CategoriasPage')
+    })
+    .catch((error: any) => {
+       this.toast.create({ message: 'e-mail ou senha inválidos', position: 'botton', duration: 3000 }).present();
+    })
+  }
+ 
   //ionViewWillEnter() {     
   //  this.menu.swipeEnable(false);   
   //} 
@@ -31,12 +49,13 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() {
-    this.navCtrl.setRoot('CategoriasPage')
-  }
-
   cadastrar(){
     this.navCtrl.push('CadastroPage')
   }
 
+}
+
+export class User{
+  email: string;
+  password: senha;
 }

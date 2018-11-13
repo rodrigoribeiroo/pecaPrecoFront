@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { UsersProvider } from './../../providers/users/users';
 
 /**
  * Generated class for the CadastroPage page.
@@ -15,16 +16,30 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage {
+  model: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController, public navParams: NavParams, public menu: MenuController,
+    private toast: ToastController, private userProvider: UsersProvider) {
+      this.model = new User();
+      this.model.email = "sydney@fife";
+      this.model.password = "pistol";
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroPage');
-  }
+ createAccount(){
+   this.userProvider.createAccount(this.model.email, this.model.password)
+   .then((result: any) => {
+      this.navCtrl.setRoot('CategoriasPage')
+   })
+   .catch((error: any) => {
+      this.navCtrl.setRoot('CadastroPage')
+   })
+ }
 
-  login() {
-    this.navCtrl.setRoot('CategoriasPage')
-  }
+  
+}
 
+export class User{
+    email: string;
+    password: string;
 }

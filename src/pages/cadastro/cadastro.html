@@ -18,11 +18,11 @@
       </ion-item>
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="text"></ion-input>        
+        <ion-input type="text" name="email" [(ngModel)]="model.email"></ion-input>        
       </ion-item>
       <ion-item>
         <ion-label floating>Senha</ion-label>
-        <ion-input type="password"></ion-input>        
+        <ion-input type="password" name="password" [(ngModel)]="model.password"></ion-input>        
       </ion-item>
       <ion-item>
         <ion-label floating>Endereço</ion-label>
@@ -32,6 +32,6 @@
         <ion-label floating>Telefone</ion-label>
         <ion-input type="text"></ion-input>        
       </ion-item>
-      <button ion-button block (click)="login()">Enviar</button>
+      <button ion-button block (click)="createAccount()" color="primary">Criar conta</button>
     </form>
 </ion-content>
