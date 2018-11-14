@@ -23,3 +23,7 @@ Para realizar um commit:
 - Agora dê uma breve descrição do que você alterou e dê enter.
 - Feito isso, clique em "..." do lado do botão de commit e Selecione "Push"
 - Pronto, as mudanças no seu branch agora aparecem nesse site e podem ser baixadas por outros membros/integradas no branch master.
+
+
+Explicação visual dos comandos, onde Remote Repository é esse site, e staging area e local repository são duas "bases" de código separadas dentro do seu computador. Workspace é o código dentro da sua IDE que você edita diretamente:
+![Explicação](https://unwiredlearning.com/wp-content/uploads/2018/07/git-flow-768x513.png)
