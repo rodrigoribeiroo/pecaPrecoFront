@@ -15,6 +15,7 @@ Mini tutorial github:
 - Abra o repositório
 - Caso já tenha um branch seu criado, clique de baixo do botão de configuração(engrenagem) na parte inferior esquerda da tela.
 - Se não: Aperte F1, digite git create branch e dê o nome logica<Seunome>
+- Após isso, aperte Ctrl + ' para abrir o Terminal e digite "npm install" para instalar todas as dependências do projeto.
 
 Para realizar um commit:
 - Clique no ícone debaixo da lupa na parte esquerda da tela
