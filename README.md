@@ -13,8 +13,6 @@ Mini tutorial github:
 - Crie uma pasta chamada VSCode Repository
 - Escolha esta pasta como o local do repositório
 - Abra o repositório
-- Caso já tenha um branch seu criado, clique de baixo do botão de configuração(engrenagem) na parte inferior esquerda da tela.
-- Se não: Aperte F1, digite git create branch e dê o nome logica<Seunome>
 - Após isso, aperte Ctrl + ' para abrir o Terminal e digite "npm install" para instalar todas as dependências do projeto.
 
 Para realizar um commit:
