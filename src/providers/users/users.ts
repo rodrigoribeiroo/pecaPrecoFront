@@ -6,6 +6,12 @@ import 'rxjs/add/operator/map';
 export class UsersProvider {
   private API_URL = 'https://reqres.in/api/'
 
+  private config = {
+    base: 'https://reqres.in/api/',
+    register: 'register',
+    login: 'login'
+  }
+
   constructor(public http: HttpClient) { }
 
   createAccount(email: String, password: String){
@@ -14,7 +20,7 @@ export class UsersProvider {
         email: email,
         password: password
       }
-      this.http.post(this.API_URL + 'register', data)
+      this.http.post(`${this.config.base}${this.config.register}`, data)
         .subscribe(result => {
           resolve(result);
         },
@@ -30,7 +36,7 @@ export class UsersProvider {
         email: email,
         password: password
       }
-      this.http.post(this.API_URL + 'login', data)
+      this.http.post(`${this.config.base}${this.config.login}`, data)
       .subscribe(result => {
         resolve(result);
       },

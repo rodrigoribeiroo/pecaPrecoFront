@@ -26,14 +26,16 @@ export class LoginPage {
       this.model.password = "cityslicka";
   }
 
+
   login(){
-    this.userProvider.login(this.model.email, this.model.password)
-    .then((result: any) => {
-       this.navCtrl.setRoot('CategoriasPage')
-    })
-    .catch((error: any) => {
-       this.toast.create({ message: 'e-mail ou senha inválidos', position: 'botton', duration: 3000 }).present();
-    })
+      this.userProvider.login(this.model.email, this.model.password)
+      .then((result: any) => {
+         localStorage.setItem("token", result.token);
+         this.navCtrl.setRoot('CategoriasPage')
+      })
+      .catch((error: any) => {
+         this.toast.create({ message: 'e-mail ou senha inválidos', position: 'botton', duration: 3000 }).present();
+      })
   }
  
   //ionViewWillEnter() {     
@@ -46,7 +48,8 @@ export class LoginPage {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    const isUserLogged = () => localStorage.getItem("token");
+    isUserLogged ? this.navCtrl.push('CategoriasPage') : null
   }
 
   cadastrar(){
@@ -57,5 +60,5 @@ export class LoginPage {
 
 export class User{
   email: string;
-  password: senha;
+  password: string;
 }
