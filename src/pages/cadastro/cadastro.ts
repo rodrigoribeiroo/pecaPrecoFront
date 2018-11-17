@@ -29,7 +29,7 @@ export class CadastroPage {
  createAccount(){
    this.userProvider.createAccount(this.model.email, this.model.password)
    .then((result: any) => {
-      this.navCtrl.setRoot('CategoriasPage')
+      this.navCtrl.setRoot('PrincipalPage')
    })
    .catch((error: any) => {
       this.navCtrl.setRoot('CadastroPage')

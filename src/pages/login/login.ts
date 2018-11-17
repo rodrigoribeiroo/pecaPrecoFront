@@ -22,8 +22,8 @@ export class LoginPage {
     public navCtrl: NavController, public navParams: NavParams, 
     private toast: ToastController, private userProvider: UsersProvider/*, public menu: MenuController*/) {
       this.model = new User();
-      this.model.email = "peter@klaven";
-      this.model.password = "cityslicka";
+      /*this.model.email = "peter@klaven";
+      this.model.password = "cityslicka";*/
   }
 
 
@@ -31,7 +31,7 @@ export class LoginPage {
       this.userProvider.login(this.model.email, this.model.password)
       .then((result: any) => {
          localStorage.setItem("token", result.token);
-         this.navCtrl.setRoot('CategoriasPage')
+         this.navCtrl.setRoot('PrincipalPage')
       })
       .catch((error: any) => {
          this.toast.create({ message: 'e-mail ou senha inválidos', position: 'botton', duration: 3000 }).present();
@@ -49,7 +49,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     const isUserLogged = () => localStorage.getItem("token");
-    isUserLogged ? this.navCtrl.push('CategoriasPage') : null
+    isUserLogged ? this.navCtrl.push('PrincipalPage') : null
   }
 
   cadastrar(){
