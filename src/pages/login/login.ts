@@ -49,7 +49,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     const isUserLogged = () => localStorage.getItem("token");
-    isUserLogged ? this.navCtrl.push('PrincipalPage') : null
+    isUserLogged ? this.navCtrl.setRoot('PrincipalPage') : null
   }
 
   cadastrar(){

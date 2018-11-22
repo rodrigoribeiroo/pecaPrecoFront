@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -9,36 +9,29 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
+  public loja: any;
+
+  private config = {
+    base: 'http://localhost:3000/api/',
+    listaLojas: 'lerListaLojas',
+    buscaLoja: 'buscarLojasPorNome'
+  }
+
+
   searchQuery: string = '';
-  items: string[];
+ 
 
 
-  constructor(public navCtrl: NavController) {
-    this.initializeItems();
-  }
-  
-  initializeItems() {
-    this.items = [
-      'Amsterdam',
-      'Bogota',
-      '...'
-    ];
+  constructor(public navCtrl: NavController, public http: HttpClient) {
+    this.getLojas();
   }
 
-  getItems(ev: any) {
-    // Reset items back to all of the items
-    this.initializeItems();
-
-    // set val to the value of the searchbar
-    const val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
-  }
+  getLojas(){
+    let data: Observable<any> = this.http.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`);
+    data.subscribe(result => {
+        this.loja = result;
+    })
+}
 
   login() {
     this.navCtrl.push('LoginPage')
