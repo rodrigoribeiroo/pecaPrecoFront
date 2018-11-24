@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicPageModule, MenuToggle } from 'ionic-angular';
 import { PrincipalPage } from './principal';
 
 @NgModule({

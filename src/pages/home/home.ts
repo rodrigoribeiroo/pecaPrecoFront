@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { HTTP } from '@ionic-native/http';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -9,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  public loja: any;
+  public lojas: [];
 
   private config = {
     base: 'http://localhost:3000/api/',
@@ -22,16 +24,32 @@ export class HomePage {
  
 
 
-  constructor(public navCtrl: NavController, public http: HttpClient) {
+  constructor(public navCtrl: NavController, public http: HttpClient, private httptest: HTTP) {
     this.getLojas();
   }
 
   getLojas(){
     let data: Observable<any> = this.http.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`);
     data.subscribe(result => {
-        this.loja = result;
-    })
-}
+        this.lojas = result;
+        })
+
+       /* this.httptest.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`)
+  .then(data => {
+
+    console.log(data.status);
+    this.lojas = data.data; // data received by server
+    console.log(data.headers);
+
+  })
+  .catch(error => {
+
+    console.log(error.status);
+    console.log(error.error); // error message as string
+    console.log(error.headers);
+
+  });*/
+  }
 
   login() {
     this.navCtrl.push('LoginPage')

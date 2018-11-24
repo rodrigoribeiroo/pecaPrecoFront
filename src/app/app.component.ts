@@ -10,6 +10,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: string = 'HomePage';
+  pageAlertas: String = 'AlertasPage';
+  pageLocalizacao: String = 'LocalicaoPage'
+  
 
   pages: Array<{title: string, component: string}>;
 
@@ -18,7 +21,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: 'HomePage' }
+      { title: 'Alertas', component: 'AlertasPage' },
+      { title: 'Mapa de Lojas', component: 'LocalizacaoPage' },
+      { title: 'Sair', component: 'HomePage' }
     ];
 
   }
@@ -35,6 +40,12 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.title=='Sair'){
+      this.nav.setRoot('HomePage');
+      localStorage.removeItem("token");
+    }
+    else {
+      this.nav.push(page.component);
+    }
   }
 }

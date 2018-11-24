@@ -7,9 +7,9 @@
                 <ion-icon name="contact"></ion-icon>
               </button>
             </ion-buttons>
-            <button ion-button menuToggle>
+            <!--<button ion-button menuToggle>
               <ion-icon name="menu"></ion-icon>
-            </button>
+            </button>-->
             <ion-title>
                 <img src ="assets/imgs/logoPecaPreco.png" alt="logo">
             </ion-title>
@@ -28,8 +28,8 @@
 </ion-header>
 
 <ion-content padding>
-    <!--<ion-searchbar (ionInput)="getLojas($event)"></ion-searchbar>-->
-    <ion-card *ngFor = "let loja of lojas">
+    <ion-searchbar (ionInput)="getLojas($event)"></ion-searchbar>
+    <ion-card *ngFor = "let lista_loja of lojas">
 
       <img src="https://www.ibadpecas.com.br/img/logos/logo-ibad-md.png"/>
       <ion-fab right top>
@@ -40,8 +40,8 @@
     
       <ion-item>
         <ion-icon name="football" item-start large></ion-icon>
-        <h2>{{lojas.nome}}</h2>
-        <p>{{lojas.cnpj}}</p>  
+        <h2>{{lista_lojas.nome}}</h2>
+        <p>{{lista_lojas.cnpj}}</p>  
       </ion-item>
     
       <ion-item>
@@ -61,7 +61,7 @@
     
     </ion-card>
 
-    <ion-card *ngFor = "let loja of lojas">
+    <!--<ion-card *ngFor = "let loja of lojas">
       <img [src]="teste.png"/>
       <ion-card-content>
         <ion-card-title>
@@ -71,6 +71,6 @@
           {{loja.cnpj}}
         </p>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
   
 </ion-content>

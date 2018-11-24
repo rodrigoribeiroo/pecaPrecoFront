@@ -16,6 +16,12 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 })
 export class PrincipalPage {
 
+  private config = {
+    base: 'http://localhost:3000/api/',
+    listaLojas: '',
+    buscaLoja: 'buscarLojasPorNome'
+  }
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
   }
 
