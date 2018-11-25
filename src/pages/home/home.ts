@@ -11,7 +11,7 @@ import { HTTP } from '@ionic-native/http';
 })
 export class HomePage {
 
-  public lojas: [];
+  public lojas;
 
   private config = {
     base: 'http://localhost:3000/api/',
@@ -21,34 +21,30 @@ export class HomePage {
 
 
   searchQuery: string = '';
- 
+
 
 
   constructor(public navCtrl: NavController, public http: HttpClient, private httptest: HTTP) {
     this.getLojas();
   }
 
-  getLojas(){
-    let data: Observable<any> = this.http.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`);
-    data.subscribe(result => {
-        this.lojas = result;
-        })
+  getLojas() {
+    this.httptest.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`, {}, {})
+      .then(data => {
 
-       /* this.httptest.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`)
-  .then(data => {
+        console.log(data.status);
+        console.log(data.data);
+        let json = JSON.parse(data.data);
+        this.lojas = json.lojas; // data received by server
 
-    console.log(data.status);
-    this.lojas = data.data; // data received by server
-    console.log(data.headers);
+      })
+      .catch(error => {
 
-  })
-  .catch(error => {
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
 
-    console.log(error.status);
-    console.log(error.error); // error message as string
-    console.log(error.headers);
-
-  });*/
+      });
   }
 
   login() {
