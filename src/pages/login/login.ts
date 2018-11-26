@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { UsersProvider } from './../../providers/users/users';
+import { HTTP } from '@ionic-native/http';
 
 //import { MenuController } from 'ionic-angular/components/app/menu-controller';
 /**
@@ -16,11 +17,18 @@ import { UsersProvider } from './../../providers/users/users';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
+  private config = {
+    base: 'http://localhost:3000/api/',
+    login: 'login',
+  }
+
   model: User;
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams, 
-    private toast: ToastController, private userProvider: UsersProvider/*, public menu: MenuController*/) {
+    private toast: ToastController, private userProvider: UsersProvider, /*public menu: MenuController*/
+    private httptest: HTTP) {
       this.model = new User();
       /*this.model.email = "peter@klaven";
       this.model.password = "cityslicka";*/
@@ -28,14 +36,23 @@ export class LoginPage {
 
 
   login(){
-      this.userProvider.login(this.model.email, this.model.password)
-      .then((result: any) => {
-         localStorage.setItem("token", result.token);
-         this.navCtrl.setRoot('PrincipalPage')
-      })
-      .catch((error: any) => {
-         this.toast.create({ message: 'e-mail ou senha inválidos', position: 'botton', duration: 3000 }).present();
-      })
+    this.httptest.post(`${this.config.base}${this.config.login}`, {"email":`${this.model.email}`, "senha":`${this.model.password}`}, {})
+    .then(data => {
+      console.log(data.status);
+      console.log(data.data);
+      let json = JSON.parse(data.data);
+      console.log(json.token);
+      localStorage.setItem("token", json.token); // data received by server
+      this.navCtrl.setRoot('PrincipalPage');
+    })
+    .catch(error => {
+
+      console.log(error.status);
+      console.log(error.error); // error message as string
+      console.log(error.headers);
+
+      this.toast.create({ message: error.error, position: 'botton', duration: 3000 }).present();
+    });
   }
  
   //ionViewWillEnter() {     
@@ -48,8 +65,12 @@ export class LoginPage {
 
 
   ionViewDidLoad() {
-    const isUserLogged = () => localStorage.getItem("token");
-    isUserLogged ? this.navCtrl.setRoot('PrincipalPage') : this.navCtrl.push('LoginPage')
+    var token = localStorage.getItem("token");
+    const isUserLogged = (token != null && typeof token != 'undefined' && token != "");
+    console.log(token);
+    if(isUserLogged){
+      this.navCtrl.setRoot('PrincipalPage')
+    }
   }
 
   cadastrar(){

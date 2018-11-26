@@ -1,0 +1,20 @@
+<!--
+  Generated template for the UploadHistoricoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>uploadHistorico</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <input [arquivo]="video.file" id="video" name="file" type="file" accept="text/*" (ionChange)="fileChangeListener($event)"></input>
+  <ion-input [(arquivo2)]="file" type="file"></ion-input>
+  <button ion-button full color="primary" (click)="upload()">Upload</button>
+</ion-content>

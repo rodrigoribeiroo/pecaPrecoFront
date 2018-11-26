@@ -51,4 +51,8 @@ export class HomePage {
     this.navCtrl.push('LoginPage')
   }
 
+  upload() {
+    this.navCtrl.push('UploadHistoricoPage')
+  }
+
 }
