@@ -48,12 +48,14 @@
     "googlemaps": "1.12.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "release": "4.0.2",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
+    "@ionic/cli-plugin-proxy": "1.5.8",
     "@ionic/lab": "1.0.13",
     "typescript": "~2.6.2"
   },

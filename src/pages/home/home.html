@@ -28,15 +28,15 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="getLojas($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="getLoja($event)"></ion-searchbar>
     <ion-card *ngFor = "let lista_loja of lojas">
 
       <img src="https://www.ibadpecas.com.br/img/logos/logo-ibad-md.png"/>
-      <ion-fab right top>
+      <!--<ion-fab right top>
         <button ion-fab>
           <ion-icon name="pin"></ion-icon>
         </button>
-      </ion-fab>
+      </ion-fab>-->
     
       <ion-item>
         <ion-icon name="football" item-start large></ion-icon>
