@@ -47,6 +47,25 @@ export class HomePage {
       });
   }
 
+  getLoja() {
+    this.httptest.get(`${this.config.base}${this.config.buscaLoja}?nome=${event}`, {}, {})
+      .then(data => {
+
+        console.log(data.status);
+        console.log(data.data);
+        let json = JSON.parse(data.data);
+        this.lojas = json.lojas; // data received by server
+
+      })
+      .catch(error => {
+
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+
+      });
+  }
+
   login() {
     this.navCtrl.push('LoginPage')
   }
