@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { Platform } from 'ionic-angular' ;
+
 import {LocationService ,
    GoogleMap ,
    GoogleMapOptions ,

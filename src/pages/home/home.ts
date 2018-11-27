@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { BluetoothSerial} from '@ionic-native/bluetooth-serial';
+import {AlertController} from 'ionic-angular';
+
 import { HTTP } from '@ionic-native/http';
 
 @IonicPage()
@@ -24,7 +26,8 @@ export class HomePage {
 
 
 
-  constructor(public navCtrl: NavController, public http: HttpClient, private httptest: HTTP) {
+  constructor(public navCtrl: NavController, public http: HttpClient, private httptest: HTTP,private bluetoothSerial: BluetoothSerial, private alertCtrl: AlertController) {
+    bluetoothSerial.enable(); 
     this.getLojas();
   }
 
@@ -73,5 +76,82 @@ export class HomePage {
   upload() {
     this.navCtrl.push('UploadHistoricoPage')
   }
+  unpairedDevices: any;
+  pairedDevices: any;
+  gettingDevices: Boolean;
+  
+  startScanning() {
+    this.pairedDevices = null;
+    this.unpairedDevices = null;
+    this.gettingDevices = true;
+    this.bluetoothSerial.discoverUnpaired().then((success) => {
+      this.unpairedDevices = success;
+      this.gettingDevices = false;
+      success.forEach(element => {
+        // alert(element.name);
+      });
+    },
+      (err) => {
+        console.log(err);
+      })
 
+    this.bluetoothSerial.list().then((success) => {
+      this.pairedDevices = success;
+    },
+      (err) => {
+
+      })
+  }
+  success = (data) => alert(data);
+  fail = (error) => alert(error);
+
+  selectDevice(address: any) {
+
+    let alert = this.alertCtrl.create({
+      title: 'Connect',
+      message: 'Você quer se conectar?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Connect',
+          handler: () => {
+            this.bluetoothSerial.connect(address).subscribe(this.success, this.fail);
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+  disconnect() {
+    let alert = this.alertCtrl.create({
+      title: 'Disconnect?',
+      message: 'Deseja Desconectar?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Disconnect',
+          handler: () => {
+            this.bluetoothSerial.disconnect();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
+
+
