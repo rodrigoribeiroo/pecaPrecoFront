@@ -7,7 +7,6 @@ import { BluetoothSerial } from ' @ ionic-native / bluetooth-serial ' ;
 import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsersProvider } from '../providers/users/users';
 
 
@@ -32,7 +31,6 @@ import { Geolocation } from '@ionic-native/geolocation';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation ,
     BluetoothSerial,

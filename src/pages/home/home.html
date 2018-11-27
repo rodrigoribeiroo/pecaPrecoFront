@@ -8,7 +8,7 @@
                 <p>Login</p>
               </button>
               <button ion-button (click)="upload()">
-                <ion-icon name="contact"></ion-icon>
+                <ion-icon name="cloud-upload"></ion-icon>
                 <p>Fazer upload de Histórico</p>
               </button>
             </ion-buttons>
@@ -33,10 +33,18 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="getLoja($event)"></ion-searchbar>
+    <div class="dropdown">
+        <ion-searchbar [(ngModel)]="searchQuery" (keydown.Enter)="getLojas($event)" (ionInput)="getLoja($event)" class="dropbtn" id="myInput"></ion-searchbar>
+          <div id="myDropdown" class="dropdown-content">
+              <ion-item *ngFor = "let loja of busca" (click)="verLoja(loja.id)">
+                  <h2>{{loja.nome}}</h2>
+              </ion-item>
+          </div>
+        </div>
+    
     <ion-card *ngFor = "let lista_loja of lojas">
 
-      <img src="https://www.ibadpecas.com.br/img/logos/logo-ibad-md.png"/>
+      <img class="lojaImg" [src]="'data:image/jpg;base64,'+ lista_loja.imagem | safeHtml"/>
       <!--<ion-fab right top>
         <button ion-fab>
           <ion-icon name="pin"></ion-icon>
@@ -44,23 +52,24 @@
       </ion-fab>-->
     
       <ion-item>
-        <ion-icon name="football" item-start large></ion-icon>
+        <ion-icon name="build" item-start large></ion-icon>
         <h2>{{lista_loja.nome}}</h2>
-        <p>{{lista_loja.cnpj}}</p>  
+        <p>CNPJ:{{lista_loja.cnpj}}</p>  
       </ion-item>
     
       <ion-item>
-        <ion-icon name="wine" item-start large ></ion-icon>
-        <h2>Institute of Fine Cocktails</h2>
-        <p>14 S. Hop Avenue, Madison, WI 53703</p>
+        <ion-icon name="home" item-start large ></ion-icon>
+        <h2>{{lista_loja.cidade}}</h2>
+        <p>{{lista_loja.bairro}}, {{lista_loja.logradouro}}, {{lista_loja.numero}}</p>
+        <p>CEP:{{lista_loja.cep}}</p>
       </ion-item>
     
       <ion-item>
-        <span item-start>18 min</span>
-        <span item-start>(2.6 mi)</span>
+        <span item-start>Latitude:{{lista_loja.latitude}}, Longitude: {{lista_loja.longitude}}</span>
+        <span item-start>(2.6 km)</span>
         <button ion-button icon-start clear item-end>
           <ion-icon name="navigate"></ion-icon>
-          Start
+          Ir até Loja
         </button>
       </ion-item>
     

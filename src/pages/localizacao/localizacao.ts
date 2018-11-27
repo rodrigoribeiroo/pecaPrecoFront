@@ -31,7 +31,7 @@ declare var google;
 })
 export class LocalizacaoPage {
   public lojas:JSON;
-  public markers;
+  public position;
 
   private config = {
     base: 'http://localhost:3000/api/',
@@ -40,37 +40,38 @@ export class LocalizacaoPage {
   }
   map: any;
  
-  constructor(private geolocation: Geolocation, private httptest: HTTP) {this.getLojas()}
+  constructor(private geolocation: Geolocation, private httptest: HTTP) {}
  
   ionViewDidLoad() {
-    this.geolocation.getCurrentPosition()
-      .then((resp) => {
-        const position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
- 
-        const mapOptions = {
-          zoom: 18,
-          center: position
-        }
- 
-        this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    this.getLojas();
+    const mapOptions = {
+      zoom: 18,
+      center: new google.maps.LatLng(-22.7890357, -43.3058404),
+    }
 
-        var i = 0;
-        var loja:any;
-        for(loja in this.lojas){
-          this.markers[i] = new google.maps.Marker({
-            position: new google.maps.LatLng(loja.latitude, loja.longitude),
-            map: this.map
-          });
-        }
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    var i = 0;
+    var loja:any;
+    for(loja in this.lojas){
+      console.log("colocando marker!");
+      new google.maps.Marker({
+        position: new google.maps.LatLng(loja.latitude, loja.longitude),
+        map: this.map
+      });
+    }
+    /*this.geolocation.getCurrentPosition()
+      .then((resp) => {
+        this.position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
  
         const marker = new google.maps.Marker({
-          position: position,
+          position: this.position,
           map: this.map
         });
  
       }).catch((error) => {
         console.log('Erro ao recuperar sua posição', error);
-      });
+      });*/
   }
 
   getLojas() {

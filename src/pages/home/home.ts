@@ -14,11 +14,13 @@ import { HTTP } from '@ionic-native/http';
 export class HomePage {
 
   public lojas;
+  public busca;
 
   private config = {
     base: 'http://localhost:3000/api/',
     listaLojas: 'lerListaLojas',
-    buscaLoja: 'buscarLojasPorNome'
+    buscaLoja: 'buscarLojasPorNome',
+    buscarLojasCompletas: 'buscarLojasCompletasPorNome'
   }
 
 
@@ -32,41 +34,68 @@ export class HomePage {
   }
 
   getLojas() {
-    this.httptest.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`, {}, {})
-      .then(data => {
+    this.busca = [];
+    if(this.searchQuery == "") {
+      this.httptest.get(`${this.config.base}${this.config.listaLojas}?quant=30&index=0`, {}, {})
+        .then(data => {
 
-        console.log(data.status);
-        console.log(data.data);
-        let json = JSON.parse(data.data);
-        this.lojas = json.lojas; // data received by server
+          console.log(data.status);
+          //console.log(data.data);
+          let json = JSON.parse(data.data);
+          this.lojas = json.lojas; // data received by server
+          this.busca = [];
 
-      })
-      .catch(error => {
+        })
+        .catch(error => {
 
-        console.log(error.status);
-        console.log(error.error); // error message as string
-        console.log(error.headers);
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
 
-      });
+        });
+    } else {
+      this.httptest.get(`${this.config.base}${this.config.buscarLojasCompletas}?quant=30&index=0&nome=${this.searchQuery}`, {}, {})
+        .then(data => {
+
+          console.log(data.status);
+          //console.log(data.data);
+          let json = JSON.parse(data.data);
+          this.lojas = json.lojas; // data received by server
+
+        })
+        .catch(error => {
+
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
+
+        });
+    }
   }
 
   getLoja() {
-    this.httptest.get(`${this.config.base}${this.config.buscaLoja}?nome=${event}`, {}, {})
-      .then(data => {
+    this.searchQuery.trim();
+    if(this.searchQuery == ""){
+      this.busca = [];
+      return;
+    } else {
+      this.httptest.get(`${this.config.base}${this.config.buscaLoja}?nome=${this.searchQuery}`, {}, {})
+        .then(data => {
 
-        console.log(data.status);
-        console.log(data.data);
-        let json = JSON.parse(data.data);
-        this.lojas = json.lojas; // data received by server
+          console.log(data.status);
+          console.log(data.data);
+          let json = JSON.parse(data.data);
+          this.busca = json.resultados; // data received by server
 
-      })
-      .catch(error => {
+        })
+        .catch(error => {
 
-        console.log(error.status);
-        console.log(error.error); // error message as string
-        console.log(error.headers);
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
 
-      });
+        });
+    }
   }
 
   login() {
@@ -152,6 +181,9 @@ export class HomePage {
     });
     alert.present();
   }
+  
+  verLoja(id:Number){
+    //this.navctrl.push('LojaPage') com parametro id sei lá como
+  }
+
 }
-
-

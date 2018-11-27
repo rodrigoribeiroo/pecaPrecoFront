@@ -16,9 +16,6 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="false" />
     <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashShowOnlyFirstTime" value="false" />
-    <preference name="SplashScreen" value="resources\splash.png" />
-    <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -86,10 +83,11 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="2.4.6">
-        <variable name="API_KEY_FOR_IOS" value="(AIzaSyB4DMkpNOXx_S5C2ZFMdfx5EN67486aEvo)" />
+        <variable name="API_KEY_FOR_IOS" value="()" />
         <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />
         <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="This app wants to get your location always, even this app runs in background." />
     </plugin>
+    <plugin name="cordova-plugin-compat" spec="1.2.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^2.0.1" />
     <engine name="android" spec="7.1.2" />
     <engine name="ios" spec="4.5.5" />
