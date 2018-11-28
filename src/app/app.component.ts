@@ -14,6 +14,8 @@ export class MyApp {
   pageAlertas: String = 'AlertasPage';
   pageLocalizacao: String = 'LocalicaoPage';
   tomtom: tomtom;
+  pageHistorico: String = 'HistoricoPage';
+  pageUploadHistorico: String = 'UploadHistoricoPage';
   
 
   pages: Array<{title: string, component: string}>;
@@ -24,7 +26,9 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Alertas', component: 'AlertasPage' },
+      { title: 'Histórico', component: 'HistoricoPage'},
       { title: 'Mapa de Lojas', component: 'LocalizacaoPage' },
+      { title: 'Upload Histórico', component: 'UploadHistoricoPage'},
       { title: 'Sair', component: 'HomePage' }
     ];
 
