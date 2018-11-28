@@ -34,13 +34,19 @@
 
 <ion-content padding>
     <div class="dropdown">
-        <ion-searchbar [(ngModel)]="searchQuery" (keydown.Enter)="getLojas($event)" (ionInput)="getLoja($event)" class="dropbtn" id="myInput"></ion-searchbar>
+        <ion-searchbar placeholder="Insira o nome da Loja" [(ngModel)]="searchQuery" (keydown.Enter)="getLojas($event)" (ionInput)="getLoja($event)" class="dropbtn myInput"></ion-searchbar>
           <div id="myDropdown" class="dropdown-content">
-              <ion-item *ngFor = "let loja of busca" (click)="verLoja(loja.id)">
+              <ion-item *ngFor = "let loja of busca" (click)="verLoja(loja.pk_id_loja)">
                   <h2>{{loja.nome}}</h2>
               </ion-item>
-          </div>
         </div>
+        <ion-searchbar placeholder="Insira o nome do Serviço" [(ngModel)]="searchQueryServico" (ionInput)="getServicos($event)" class="dropbtn myInput"></ion-searchbar>
+          <div id="myDropdown2" class="dropdown-content">
+              <ion-item *ngFor = "let servico of buscaServico">
+                  <h2>{{servico.nome}}</h2>
+              </ion-item>
+        </div>
+    </div>
     
     <ion-card *ngFor = "let lista_loja of lojas">
 
@@ -53,8 +59,10 @@
     
       <ion-item>
         <ion-icon name="build" item-start large></ion-icon>
-        <h2>{{lista_loja.nome}}</h2>
-        <p>CNPJ:{{lista_loja.cnpj}}</p>  
+        <h2>Serviços</h2>
+        <div *ngFor = "let servico of lista_loja.servicos">
+          <p>{{servico.nome}}, preço: {{servico.preco == null ? 'A combinar' : 'R$ ' + servico.preco }} </p>
+        </div>
       </ion-item>
     
       <ion-item>

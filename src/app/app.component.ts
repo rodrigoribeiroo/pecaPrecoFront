@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import * as tomtom from '../tomtomsdk/tomtom.min.js';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -10,7 +12,8 @@ export class MyApp {
 
   rootPage: string = 'HomePage';
   pageAlertas: String = 'AlertasPage';
-  pageLocalizacao: String = 'LocalicaoPage'
+  pageLocalizacao: String = 'LocalicaoPage';
+  tomtom: tomtom;
   
 
   pages: Array<{title: string, component: string}>;

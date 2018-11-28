@@ -14,17 +14,20 @@ import { HTTP } from '@ionic-native/http';
 export class HomePage {
 
   public lojas;
+  public buscaServico;
   public busca;
 
   private config = {
     base: 'http://localhost:3000/api/',
     listaLojas: 'lerListaLojas',
     buscaLoja: 'buscarLojasPorNome',
-    buscarLojasCompletas: 'buscarLojasCompletasPorNome'
+    buscarLojasCompletas: 'buscarLojasCompletasPorNome',
+    listaServicos: 'buscarServicosPorNome'
   }
 
 
   searchQuery: string = '';
+  searchQueryServico: string = '';
 
 
 
@@ -61,6 +64,44 @@ export class HomePage {
           //console.log(data.data);
           let json = JSON.parse(data.data);
           this.lojas = json.lojas; // data received by server
+
+        })
+        .catch(error => {
+
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
+
+        });
+    }
+  }
+
+  getServicos() {
+    this.busca = [];
+    if(this.searchQueryServico != "") {
+      this.httptest.get(`${this.config.base}${this.config.listaServicos}?nome=${this.searchQueryServico}`, {}, {})
+        .then(data => {
+
+          console.log(data.status);
+          //console.log(data.data);
+          let json = JSON.parse(data.data);
+          this.buscaServico = json.servicos; // data received by server
+        })
+        .catch(error => {
+
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
+
+        });
+    } else {
+      this.httptest.get(`${this.config.base}${this.config.listaServicos}?nome= `, {}, {})
+        .then(data => {
+
+          console.log(data.status);
+          //console.log(data.data);
+          let json = JSON.parse(data.data);
+          this.buscaServico = json.servicos; // data received by server
 
         })
         .catch(error => {
