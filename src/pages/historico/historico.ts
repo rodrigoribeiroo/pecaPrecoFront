@@ -31,7 +31,7 @@ export class HistoricoPage {
     .then(data => {
 
       //console.log(data.status);
-      //console.log(data.data);
+      console.log(data.data);
       let json = JSON.parse(data.data);
       this.historicos = json.historicos; // data received by server
 

@@ -14,33 +14,43 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor='let hist of historicos'>
+  <ion-card *ngFor="let hist of historicos">
     <ion-item>
-      {{hist.viagem[0].EngineRPM}}
+      <h1>Viagem de {{hist.datahoraenvio}}</h1>
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].FuelLevel}}
+      <h2>DTCs</h2>
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].EngineLoad}}
+      <p>{{hist.dtc == null ? 'Sem problemas detectados!' : ' '}}</p>
+    </ion-item>
+    <ion-item *ngFor="let dtcuni of hist.dtc">
+        <p>Código: {{dtcuni}}</p>
+    </ion-item>
+          
+    <ion-item>
+      RPM Média: {{hist.dadosobd.viagem[0].EngineRPM}} RPM
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].EngineTemp}}
+      Diferença de combustível nesta viagem: +{{hist.dadosobd.viagem[0].FuelLevel}}%
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].VehicleSpeed}}
+      Carga média do motor: {{hist.dadosobd.viagem[0].EngineLoad}}%
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].AccelerationLoad}}
+      Temperatura média do motor: {{hist.dadosobd.viagem[0].EngineTemp}}°C
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].DistanceWithMILOn}}
+      Velcoidade média: {{hist.dadosobd.viagem[0].VehicleSpeed}}km/h
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].BarometricPressure}}
+      Carga de aceleração média: {{hist.dadosobd.viagem[0].AccelerationLoad}}%
     </ion-item>
     <ion-item>
-      {{hist.viagem[0].DistanceWithoutMILOn}}
+      Distância percorrida com defeitos: {{hist.dadosobd.viagem[0].DistanceWithMILOn}}km
+    </ion-item>
+    <ion-item>
+      Distância percorrida desde o último defeito: {{hist.dadosobd.viagem[0].DistanceWithoutMILOn}}km
     </ion-item>
   </ion-card>
 </ion-content>

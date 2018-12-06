@@ -29,7 +29,7 @@ plugins/android.json
 plugins/ios.json
 www/
 $RECYCLE.BIN/
-src/tomtomsdk
+src/tomtomsdk.zip
 
 .DS_Store
 Thumbs.db
